@@ -99,6 +99,8 @@ def main():
             "period": e["period"],
             "group": e["group"] if e["category"] not in ("lanthanide", "actinide") else None,
             "block": e["block"],
+            "col": e["xpos"],  # position in the 18-column table; rows 9 and 10 are the f-block
+            "row": e["ypos"],
             "density": e["density"] if measured else None,
             "melt": kelvin(e["melt"]),
             "boil": kelvin(e["boil"]),

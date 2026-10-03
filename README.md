@@ -5,7 +5,9 @@ A daily periodic-table grid. Fill each of the nine cells with an element that fi
 Play: https://gh.tschieber.de/chemgrid/
 
 - One board per day, switching at midnight Berlin time. The arrows under the title go back to earlier days.
-- Type a symbol or a name; the field completes an element once what you typed can mean just one.
+- Tap an element on the periodic table under the board, or type a symbol or a name; the field completes an element once what you typed can mean just one.
+- A wrong guess tells you which of the two criteria it missed.
+- Every cell can be solved with well-known elements (the first 36 plus the famous heavy ones); the rest are valid too.
 - The question mark explains exactly how every criterion is counted.
 - Rarity is simulated, not crowdsourced: each valid answer gets a share based on how well known the element is (Wikipedia page views, and how early it comes in the table) and how obviously it fits the two criteria.
 

@@ -97,7 +97,12 @@ function guess(element) {
     if (selected === -1) selected = null;
     setMessage("");
   } else {
-    setMessage(`${element.name} does not fit.`, true);
+    const fitsRow = engine.category(row).test(element), fitsCol = engine.category(col).test(element);
+    const [ok, missed] = fitsRow ? [row, col] : [col, row];
+    const why = fitsRow || fitsCol
+      ? `${element.name} fits “${engine.category(ok).label}” but not “${engine.category(missed).label}”.`
+      : `${element.name} fits neither “${engine.category(row).label}” nor “${engine.category(col).label}”.`;
+    setMessage(why, true);
     shake(i);
   }
   finishIfDone();
@@ -151,6 +156,7 @@ function render() {
     board.append(cell);
   });
 
+  renderTable();
   $("day").textContent = formatDay(day);
   $("next-day").disabled = day >= today();
   $("to-today").hidden = day >= today();
@@ -161,6 +167,26 @@ function render() {
   $("give-up").hidden = game.over;
   if (game.over && !$("message").textContent) setMessage("Tap a cell to see every element that fits.");
   renderAnswers();
+}
+
+// The whole periodic table, to pick from instead of typing. Used elements are
+// greyed out; the f-block sits below the main table as on a wall chart.
+function renderTable() {
+  const table = $("table");
+  table.replaceChildren();
+  const used = new Set(game.cells.filter(Boolean));
+  for (const e of elements) {
+    const tile = document.createElement("button");
+    tile.className = `tile ${familyClass(e)}`;
+    tile.style.gridColumn = e.col;
+    tile.style.gridRow = e.row > 7 ? e.row + 1 : e.row; // leave a gap row above the f-block
+    tile.title = `${e.number} ${e.name}`;
+    tile.textContent = e.id;
+    tile.disabled = used.has(e.id) || game.over;
+    if (used.has(e.id)) tile.classList.add("used");
+    tile.addEventListener("click", () => choose(e));
+    table.append(tile);
+  }
 }
 
 function selectCell(i) {

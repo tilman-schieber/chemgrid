@@ -156,6 +156,22 @@ h1 { font: 700 1.6rem/1 var(--text); letter-spacing: -0.02em; margin: 0; margin-
 .legend { display: flex; flex-wrap: wrap; gap: 4px 6px; list-style: none; margin: 10px 0 0; padding: 0; font: 0.66rem var(--mono); color: var(--ink); }
 .legend li { padding: 1px 6px; border: 1px solid var(--ink); }
 
+/* The pick-from table: 18 columns, main body on rows 1–7, the f-block two rows further down. */
+.table-wrap { margin-top: 16px; overflow-x: auto; }
+.table { display: grid; grid-template-columns: repeat(18, minmax(24px, 1fr)); grid-auto-rows: 24px; gap: 2px; min-width: 466px; }
+.tile {
+  padding: 0;
+  font: 600 0.62rem/1 var(--mono);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+}
+.tile:hover:not(:disabled) { outline: 2px solid var(--accent); outline-offset: -1px; }
+.tile.used { background: var(--rule); color: var(--faded); text-decoration: line-through; }
+.tile:disabled { cursor: default; }
+.tile:disabled:not(.used) { opacity: 0.6; }
+
 .entry { position: relative; margin-top: 16px; }
 .entry input {
   width: 100%;
@@ -250,6 +266,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .label { font-size: 0.66rem; padding: 4px 2px; }
   .cell .symbol { font-size: 1.5rem; }
   .legend { order: 5; font-size: 0.6rem; }
-  .actions { order: 6; }
-  .answers { order: 7; }
+  .table-wrap { order: 6; margin-top: 10px; }
+  .actions { order: 7; }
+  .answers { order: 8; }
 }

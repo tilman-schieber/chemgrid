@@ -1,6 +1,10 @@
 import { CATEGORIES } from "./categories.js";
 
 export const MIN_ANSWERS = 3; // every cell must have at least this many valid answers
+// ... and at least this many among the elements people actually know, so a
+// cell can always be solved without the lanthanides and the synthetic heavies.
+export const MIN_CORE = 3;
+export const CORE = (e) => e.number <= 36 || ["Ag", "Sn", "I", "Xe", "Cs", "Ba", "W", "Pt", "Au", "Hg", "Pb", "Bi", "Rn", "Ra", "U", "Pu"].includes(e.id);
 export const MAX_ANSWERS = 25; // and at most this many: beyond that a cell is a free square
 export const MAX_BIG_CELLS = 2; // cells with more than BIG_CELL answers allowed per board
 export const BIG_CELL = 15;
@@ -62,8 +66,8 @@ export function createEngine(elements) {
   // A pair of categories can share a board when their cell is the right size
   // and neither implies the other.
   const fits = (a, b) => {
-    const n = answers(a.id, b.id).length;
-    return n >= MIN_ANSWERS && n <= MAX_ANSWERS && !redundant.has(`${a.id}|${b.id}`);
+    const cell = answers(a.id, b.id);
+    return cell.length >= MIN_ANSWERS && cell.length <= MAX_ANSWERS && cell.filter(CORE).length >= MIN_CORE && !redundant.has(`${a.id}|${b.id}`);
   };
   const shuffled = (rand, list) => {
     const copy = [...list];
