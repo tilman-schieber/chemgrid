@@ -1,0 +1,99 @@
+{
+  "_comment": "Hand-kept lists (element symbols). build.py asserts the expected counts, so an accidental edit fails loudly.",
+  "discovery_year_overrides": {
+    "_comment": "Elements known since antiquity, where Wikidata gives no date.",
+    "C": -3750, "S": -2000, "Fe": -5000, "Cu": -9000, "Ag": -5000, "Sn": -3500, "Sb": -3000, "Au": -6000, "Hg": -1500, "Pb": -7000, "Bi": 1400, "Zn": 1000, "As": 1250
+  },
+  "sets": {
+    "named_person": {
+      "expect": 16,
+      "note": "Named after a real person.",
+      "members": ["Sm", "Gd", "Cm", "Es", "Fm", "Md", "No", "Lr", "Rf", "Sg", "Bh", "Mt", "Rg", "Cn", "Fl", "Og"]
+    },
+    "named_place": {
+      "expect": 29,
+      "note": "Named after a place: a village, city, region, country or continent.",
+      "members": ["Mg", "Cu", "Sr", "Y", "Tb", "Er", "Yb", "Sc", "Ga", "Ge", "Ru", "Eu", "Ho", "Tm", "Lu", "Hf", "Re", "Fr", "Po", "Am", "Bk", "Cf", "Db", "Hs", "Ds", "Nh", "Mc", "Lv", "Ts"]
+    },
+    "named_celestial": {
+      "expect": 9,
+      "note": "Named after the Sun, the Moon, the Earth, a planet or an asteroid.",
+      "members": ["He", "Se", "Te", "Ce", "Pd", "U", "Np", "Pu", "Hg"]
+    },
+    "named_myth": {
+      "expect": 9,
+      "note": "Named after a mythological figure or creature.",
+      "members": ["Ti", "V", "Nb", "Ta", "Pm", "Th", "Ir", "Co", "Ni"]
+    },
+    "named_colour": {
+      "expect": 10,
+      "note": "Named after a colour (usually the colour of a flame or spectral line, in Greek or Latin).",
+      "members": ["Cl", "I", "Rb", "Cs", "In", "Rh", "Pr", "Tl", "Cr", "Zr"]
+    },
+    "latin_symbol": {
+      "expect": 11,
+      "note": "Symbol comes from a Latin or other old name, not the English one.",
+      "members": ["Na", "K", "Fe", "Cu", "Ag", "Sn", "Sb", "W", "Au", "Hg", "Pb"]
+    },
+    "essential": {
+      "expect": 21,
+      "note": "Essential to human life, including trace elements.",
+      "members": ["H", "C", "N", "O", "P", "S", "Na", "K", "Ca", "Mg", "Cl", "Fe", "Zn", "Cu", "I", "Se", "Mn", "Mo", "Co", "Cr", "F"]
+    },
+    "synthetic": {
+      "expect": 28,
+      "note": "First made in a laboratory rather than found in nature.",
+      "members": ["Tc", "Pm", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"]
+    },
+    "discovered_sweden": {
+      "expect": 19,
+      "note": "Discovered in Sweden (Finland was Swedish when yttrium was found there).",
+      "members": ["Co", "Ni", "Mn", "Mo", "Cl", "Ce", "Se", "Si", "Th", "Li", "V", "La", "Er", "Tb", "Y", "Sc", "Ho", "Tm", "Ta"]
+    },
+    "discovered_uk": {
+      "expect": 22,
+      "note": "Discovered in Britain.",
+      "members": ["H", "N", "O", "Ti", "Nb", "Pd", "Rh", "Os", "Ir", "K", "Na", "Ca", "Mg", "Sr", "Ba", "B", "Tl", "Ar", "Ne", "Kr", "Xe", "He"]
+    },
+    "discovered_germany": {
+      "expect": 17,
+      "note": "Discovered in Germany.",
+      "members": ["Ge", "Cs", "Rb", "In", "Re", "Pa", "Rn", "Nd", "Zn", "U", "Zr", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn"]
+    },
+    "discovered_france": {
+      "expect": 14,
+      "note": "Discovered in France.",
+      "members": ["Ga", "Sm", "Eu", "Dy", "Fr", "Ra", "Po", "Ac", "Be", "Cr", "I", "Br", "F", "Lu"]
+    },
+    "discovered_usa": {
+      "expect": 12,
+      "note": "Discovered in the United States.",
+      "members": ["Pm", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "Lr", "Sg"]
+    },
+    "discovered_russia": {
+      "expect": 8,
+      "note": "Discovered in Russia or the Soviet Union, including the joint Dubna discoveries.",
+      "members": ["Ru", "Rf", "Db", "Fl", "Mc", "Lv", "Ts", "Og"]
+    },
+    "discovered_woman": {
+      "expect": 5,
+      "note": "A woman discovered or co-discovered it: Marie Curie, Marguerite Perey, Ida Noddack, Lise Meitner.",
+      "members": ["Po", "Ra", "Fr", "Re", "Pa"]
+    },
+    "precious": {
+      "expect": 8,
+      "note": "Precious metals: gold, silver and the six platinum-group metals.",
+      "members": ["Ru", "Rh", "Pd", "Ag", "Os", "Ir", "Pt", "Au"]
+    },
+    "crust_top10": {
+      "expect": 10,
+      "note": "The ten most abundant elements in the Earth's crust.",
+      "members": ["O", "Si", "Al", "Fe", "Ca", "Na", "K", "Mg", "Ti", "H"]
+    },
+    "air": {
+      "expect": 8,
+      "note": "Present as a gas in dry air (not counting carbon dioxide).",
+      "members": ["N", "O", "Ar", "Ne", "He", "Kr", "Xe", "H"]
+    }
+  }
+}

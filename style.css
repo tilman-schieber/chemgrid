@@ -1,0 +1,255 @@
+/* A classroom periodic table: cool grey paper, white tiles with ink borders,
+   a big symbol in each tile, mono numerals, and filled tiles in the pastel
+   family colours of a wall chart. */
+:root {
+  color-scheme: light;
+  --page: #e9ecef;
+  --surface: #ffffff;
+  --ink: #1b1f24;
+  --faded: #6b7280;
+  --rule: #c8cdd3;
+  --accent: #0b6e99;
+  --number: #1b1f24;
+  --wrong: #b3261e;
+  --alkali: #f8b4b4;
+  --alkaline: #fbd59c;
+  --transition: #fbe7a1;
+  --post: #cfe8c8;
+  --metalloid: #b9e0d2;
+  --nonmetal: #b7d8f2;
+  --noble: #d4c5f0;
+  --lanthanide: #f2c6e0;
+  --actinide: #e3c3b0;
+  --unknown: #e3e6ea;
+  --text: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+
+[hidden] { display: none !important; }
+* { box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 16px/1.45 var(--text);
+}
+
+main {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 26px;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+}
+
+main > header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.logo {
+  flex: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--ink);
+  background: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 1.1rem/1 var(--text);
+}
+.logo i { position: absolute; top: 2px; left: 4px; font: 400 0.55rem/1 var(--mono); }
+.logo b { font-weight: 700; }
+h1 { font: 700 1.6rem/1 var(--text); letter-spacing: -0.02em; margin: 0; margin-right: auto; }
+.status { display: flex; gap: 14px; white-space: nowrap; font: 0.85rem var(--mono); color: var(--faded); }
+#score { color: var(--accent); font-weight: 600; }
+
+.icon { display: flex; padding: 4px; color: var(--faded); background: none; border: 0; cursor: pointer; }
+.icon:hover { color: var(--accent); }
+
+.days { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font: 0.9rem var(--mono); }
+.days button { font: inherit; font-size: 1.3rem; font-weight: 600; line-height: 1; color: var(--accent); background: none; border: 0; padding: 4px 12px; min-width: 44px; cursor: pointer; }
+.days button:disabled { color: var(--faded); opacity: 0.45; cursor: default; }
+#day { min-width: 10em; text-align: center; }
+.days .today { margin-left: auto; font-size: 0.85rem; border-bottom: 1px solid currentColor; padding: 0; min-width: 0; }
+
+.board {
+  display: grid;
+  grid-template-columns: minmax(64px, 0.8fr) repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 6px 4px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.board > .label:nth-child(-n+4) { justify-content: flex-end; }
+.ref { font: 0.68rem var(--mono); color: var(--faded); letter-spacing: 0.1em; }
+
+/* A tile: number top left, symbol large, name and rarity below, like a wall chart. */
+.cell {
+  position: relative;
+  aspect-ratio: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1.5px dashed var(--rule);
+  border-radius: 0;
+  color: inherit;
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 14px 4px 6px;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.cell:hover { border-color: var(--faded); }
+.cell.selected { border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.cell.filled { border: 1.5px solid var(--ink); cursor: default; }
+.cell.over { cursor: pointer; }
+.cell.filled.selected { box-shadow: inset 0 0 0 2px var(--accent); }
+.cell .ref { position: absolute; top: 5px; left: 7px; visibility: hidden; }
+.cell.selected .ref { visibility: visible; color: var(--accent); }
+.cell .number { position: absolute; top: 4px; left: 6px; font: 0.7rem var(--mono); }
+.cell .symbol { font: 700 1.9rem/1 var(--text); letter-spacing: -0.02em; }
+.cell .name { font-size: 0.72rem; line-height: 1.15; max-width: 100%; overflow-wrap: anywhere; }
+.cell .mass { font: 0.68rem var(--mono); color: var(--faded); }
+.family-alkali { background: var(--alkali); }
+.family-alkaline { background: var(--alkaline); }
+.family-transition { background: var(--transition); }
+.family-post { background: var(--post); }
+.family-metalloid { background: var(--metalloid); }
+.family-nonmetal { background: var(--nonmetal); }
+.family-noble { background: var(--noble); }
+.family-lanthanide { background: var(--lanthanide); }
+.family-actinide { background: var(--actinide); }
+.family-unknown { background: var(--unknown); }
+.cell.shake { animation: shake 0.3s; border-color: var(--wrong); }
+@keyframes shake {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cell.shake { animation: none; }
+}
+
+.legend { display: flex; flex-wrap: wrap; gap: 4px 6px; list-style: none; margin: 10px 0 0; padding: 0; font: 0.66rem var(--mono); color: var(--ink); }
+.legend li { padding: 1px 6px; border: 1px solid var(--ink); }
+
+.entry { position: relative; margin-top: 16px; }
+.entry input {
+  width: 100%;
+  padding: 9px 10px;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  caret-color: var(--accent);
+}
+.entry input::placeholder { color: var(--faded); }
+.entry input:focus { outline: none; border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-top: 0;
+}
+.suggestions:empty { display: none; }
+.suggestions li { padding: 8px 10px; cursor: pointer; color: var(--accent); font-weight: 600; }
+.suggestions li::after { content: "  ⏎"; white-space: pre; color: var(--faded); font-weight: 400; }
+
+.message { white-space: pre-line; overflow-wrap: anywhere; min-height: 1.45em; margin: 10px 0 0; font-size: 0.9rem; color: var(--faded); }
+.message.wrong { color: var(--wrong); }
+
+.actions { display: flex; gap: 10px; margin-top: 10px; }
+.actions button {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.actions button:hover { color: var(--accent); border-color: var(--accent); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.answers { margin-top: 22px; }
+.answers h2 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 6px; padding-bottom: 6px; border-bottom: 1.5px solid var(--ink); }
+.answers ol { list-style: none; margin: 0; padding: 0; }
+.answers li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; font-size: 0.9rem; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.answers li b { display: inline-block; min-width: 2.4em; margin-right: 4px; padding: 0 4px; font: 600 0.8rem var(--mono); text-align: center; border: 1px solid var(--ink); }
+.answers li span:last-child { font: 0.85rem var(--mono); }
+.answers li.mine { color: var(--accent); }
+
+.help {
+  width: min(640px, calc(100vw - 24px));
+  height: min(760px, calc(100dvh - 24px));
+  padding: 0;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  font: inherit;
+}
+.help[open] { display: flex; flex-direction: column; }
+.help::backdrop { background: rgb(0 0 0 / 0.45); }
+.help-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px 10px; }
+.help-head h2 { font: 700 1.2rem/1.1 var(--text); margin: 0; }
+.help input { margin: 0 20px; padding: 8px 10px; font: inherit; color: inherit; background: var(--surface); border: 1.5px solid var(--ink); border-radius: 0; }
+.help input::placeholder { color: var(--faded); }
+.help input:focus { outline: none; border-color: var(--accent); }
+.help-intro { margin: 12px 20px 0; font-size: 0.85rem; color: var(--faded); }
+.help-list { flex: 1; overflow-y: auto; padding: 0 20px 20px; margin-top: 12px; border-top: 1.5px solid var(--ink); }
+.help-list h3 { margin: 18px 0 2px; font: 600 0.72rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.help-group { margin: 6px 0 4px; font-size: 0.85rem; line-height: 1.5; }
+.help-list article { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.help-list article header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0; }
+.help-list article header span { flex: none; font: 0.78rem var(--mono); color: var(--faded); }
+.help-list article p { margin: 4px 0 0; font-size: 0.85rem; line-height: 1.5; }
+.help-empty { margin: 18px 0; color: var(--faded); }
+
+/* Phones: the sheet is the page, and the guess field sticks to the top. */
+@media (max-width: 620px) {
+  main { margin: 0; padding: 16px; width: 100%; border: 0; display: flex; flex-direction: column; }
+  main > header { order: 0; gap: 4px 8px; flex-wrap: wrap; }
+  main > header h1 { font-size: 1.3rem; }
+  .status { font-size: 0.75rem; }
+  .days { order: 1; }
+  .entry { order: 2; position: sticky; top: 0; z-index: 2; margin: 0; padding: 6px 0 8px; background: var(--surface); }
+  .message { order: 3; margin: 0 0 8px; }
+  .board { order: 4; max-width: 100%; grid-template-columns: minmax(84px, 1fr) repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .label { font-size: 0.66rem; padding: 4px 2px; }
+  .cell .symbol { font-size: 1.5rem; }
+  .legend { order: 5; font-size: 0.6rem; }
+  .actions { order: 6; }
+  .answers { order: 7; }
+}
