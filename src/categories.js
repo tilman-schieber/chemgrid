@@ -6,7 +6,6 @@ const has = (v) => v !== null && v !== undefined;
 
 export const GROUPS = {
   family: { title: "Family", how: "The usual periodic-table families. The superheavy elements from 104 on have no measured properties and belong to no family here." },
-  table: { title: "Place in the table" },
   state: { title: "State and properties", how: "Measured values for elements up to 103; temperatures at normal pressure. Elements without a measured value never qualify." },
   number: { title: "Atomic number and mass" },
   discovery: { title: "Discovery", how: "Year and place of discovery as given on Wikipedia. Elements known since antiquity count as discovered before every date." },
@@ -37,18 +36,6 @@ const family = [
   { id: "family:metal", label: "Metal", group: "family", how: "Any metal family: alkali, alkaline earth, transition, post-transition, lanthanide or actinide.", test: (e) => METALS.includes(e.category) },
   { id: "family:nonmetal", label: "Nonmetal", group: "family", how: "Reactive nonmetals and noble gases; metalloids do not count.", test: (e) => /nonmetal|noble gas/.test(e.category) },
   { id: "family:halogen", label: "Halogen", group: "family", how: "Group 17.", test: (e) => e.group === 17 },
-];
-
-const table = [
-  ...[1, 2, 3, 4, 5, 6, 7].map((n) => ({ id: `period:${n}`, label: `Period ${n}`, group: "table", test: (e) => e.period === n })),
-  ...[1, 2, 13, 14, 15, 16, 18].map((n) => ({
-    id: `group:${n}`,
-    label: `Group ${n}`,
-    group: "table",
-    how: n === 1 ? "Hydrogen counts." : undefined,
-    test: (e) => e.group === n,
-  })),
-  ...["s", "p", "d", "f"].map((b) => ({ id: `block:${b}`, label: `${b}-block`, group: "table", test: (e) => e.block === b })),
 ];
 
 const state = [
@@ -119,4 +106,4 @@ const world = [
   { id: "set:air", label: "In the air", group: "world", how: "A gas in dry air, not counting carbon dioxide.", test: (e) => e.sets.includes("air") },
 ];
 
-export const CATEGORIES = [...family, ...table, ...state, ...number, ...discovery, ...names, ...origin, ...world];
+export const CATEGORIES = [...family, ...state, ...number, ...discovery, ...names, ...origin, ...world];
