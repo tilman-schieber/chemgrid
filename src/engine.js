@@ -1,14 +1,14 @@
 import { CATEGORIES } from "./categories.js";
 
-export const MIN_ANSWERS = 3; // every cell must have at least this many valid answers
-// ... and at least this many among the elements people actually know, so a
-// cell can always be solved without the lanthanides and the synthetic heavies.
-export const MIN_CORE = 3;
-export const CORE = (e) => e.number <= 36 || ["Ag", "Sn", "I", "Xe", "Cs", "Ba", "W", "Pt", "Au", "Hg", "Pb", "Bi", "Rn", "Ra", "U", "Pu"].includes(e.id);
+export const MIN_ANSWERS = 4; // every cell must have at least this many valid answers
 export const MAX_ANSWERS = 25; // and at most this many: beyond that a cell is a free square
 export const MAX_BIG_CELLS = 2; // cells with more than BIG_CELL answers allowed per board
 export const BIG_CELL = 15;
 export const MAX_GUESSES = 10;
+// Broad categories with many well-known members ("Discovered in the 19th
+// century") fit almost any row, so without a limit they end up on every board.
+export const BROAD = 40; // members
+export const MAX_BROAD = 1; // per board
 // Two categories are redundant when this share of the smaller one also fits the
 // larger ("Noble gas" with "Group 18"); a board never contains such a pair.
 export const MAX_OVERLAP = 0.85;
@@ -67,45 +67,53 @@ export function createEngine(elements) {
   // and neither implies the other.
   const fits = (a, b) => {
     const cell = answers(a.id, b.id);
-    return cell.length >= MIN_ANSWERS && cell.length <= MAX_ANSWERS && cell.filter(CORE).length >= MIN_CORE && !redundant.has(`${a.id}|${b.id}`);
+    return cell.length >= MIN_ANSWERS && cell.length <= MAX_ANSWERS && !redundant.has(`${a.id}|${b.id}`);
   };
-  const shuffled = (rand, list) => {
-    const copy = [...list];
-    for (let i = copy.length - 1; i > 0; i--) {
-      const j = Math.floor(rand() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
-  };
+  // Weighted shuffle in which every group is equally likely to come first,
+  // however many categories it has.
+  const groupSize = {};
+  for (const cat of usable) groupSize[cat.group] = (groupSize[cat.group] || 0) + 1;
+  const shuffled = (rand, list) =>
+    list.map((cat) => [-Math.log(1 - rand()) * groupSize[cat.group], cat]).sort((a, b) => a[0] - b[0]).map(([, cat]) => cat);
 
-  // Same seed + same data always yields the same board. Rows are drawn first;
-  // columns are then drawn only from categories that fit all three rows, which
-  // is what makes boards findable in a small pool like the elements.
+  // Same seed + same data always yields the same board. Each board is built
+  // around an anchor drawn at random: three columns that fit it, then two more
+  // rows that fit all three columns. Drawing rows at random instead lets the
+  // few broad categories that fit almost anything take over every board.
+  const ATTEMPTS_PER_ANCHOR = 200;
   function generateBoard(seed) {
     const rand = mulberry32(hashString(String(seed)));
-    for (let attempt = 0; attempt < 500; attempt++) {
-      const picked = [];
-      const groups = {};
-      const allowed = (cat) => !picked.includes(cat) && (groups[cat.group] || 0) < 2 && !picked.some((p) => redundant.has(`${p.id}|${cat.id}`));
-      const take = (cat) => {
-        groups[cat.group] = (groups[cat.group] || 0) + 1;
-        picked.push(cat);
-      };
-      for (const cat of shuffled(rand, usable)) {
-        if (picked.length === 3) break;
-        if (allowed(cat)) take(cat);
+    for (const anchor of shuffled(rand, usable)) {
+      for (let attempt = 0; attempt < ATTEMPTS_PER_ANCHOR; attempt++) {
+        const picked = [];
+        const groups = {};
+        const allowed = (cat) => !picked.includes(cat) && (groups[cat.group] || 0) < 2 && !picked.some((p) => redundant.has(`${p.id}|${cat.id}`));
+        const take = (cat) => {
+          groups[cat.group] = (groups[cat.group] || 0) + 1;
+          picked.push(cat);
+        };
+        take(anchor);
+        for (const cat of shuffled(rand, usable)) {
+          if (picked.length === 4) break;
+          if (allowed(cat) && fits(anchor, cat)) take(cat);
+        }
+        if (picked.length < 4) break; // this anchor has too few partners
+        const cols = picked.slice(1);
+        for (const cat of shuffled(rand, usable)) {
+          if (picked.length === 6) break;
+          if (allowed(cat) && cols.every((c) => fits(cat, c))) take(cat);
+        }
+        if (picked.length < 6) continue;
+        if (picked.filter((cat) => matches.get(cat.id).size >= BROAD).length > MAX_BROAD) continue;
+        const rows = [anchor, ...picked.slice(4)];
+        const cells = rows.flatMap((r) => cols.map((c) => answers(r.id, c.id)));
+        if (cells.filter((a) => a.length > BIG_CELL).length > MAX_BIG_CELLS) continue;
+        if (!hasDistinctFill(cells)) continue;
+        // The anchor goes to a random row or column.
+        const [r, c] = rand() < 0.5 ? [rows, cols] : [cols, rows];
+        const order = shuffled(rand, r.map((cat, i) => i).map((i) => r[i]));
+        return { seed: String(seed), rows: order.map((cat) => cat.id), cols: shuffled(rand, c).map((cat) => cat.id) };
       }
-      const rows = picked.slice(0, 3);
-      for (const cat of shuffled(rand, usable)) {
-        if (picked.length === 6) break;
-        if (allowed(cat) && rows.every((r) => fits(r, cat))) take(cat);
-      }
-      if (picked.length < 6) continue;
-      const cols = picked.slice(3);
-      const cells = rows.flatMap((r) => cols.map((c) => answers(r.id, c.id)));
-      if (cells.filter((a) => a.length > BIG_CELL).length > MAX_BIG_CELLS) continue;
-      if (!hasDistinctFill(cells)) continue;
-      return { seed: String(seed), rows: rows.map((c) => c.id), cols: cols.map((c) => c.id) };
     }
     throw new Error("could not generate a board");
   }

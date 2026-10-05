@@ -1,15 +1,14 @@
 # Chemgrid
 
-A daily periodic-table grid. Fill each of the nine cells with an element that fits both its row and its column, in ten guesses. Rarer answers score lower, and the lowest total wins.
+A daily periodic-table grid. Fill each of the nine cells with an element that fits both its row and its column, in ten guesses.
 
 Play: https://gh.tschieber.de/chemgrid/
 
 - One board per day, switching at midnight Berlin time. The arrows under the title go back to earlier days.
 - Tap an element on the periodic table under the board, or type a symbol or a name; the field completes an element once what you typed can mean just one.
 - A wrong guess tells you which of the two criteria it missed.
-- Every cell can be solved with well-known elements (the first 36 plus the famous heavy ones); the rest are valid too.
+- Every cell has at least four answers, and the nine cells can always be filled with nine different elements.
 - The question mark explains exactly how every criterion is counted.
-- Rarity is simulated, not crowdsourced: each valid answer gets a share based on how well known the element is (Wikipedia page views, and how early it comes in the table) and how obviously it fits the two criteria.
 
 A sibling of [Crosscountry](https://github.com/tilman-schieber/crosscountry), the same game with countries. Inspired by Immaculate Grid; not affiliated.
 
@@ -31,7 +30,6 @@ Downloads are cached in `data/raw/`. Hand-kept lists live in `data/curated.json`
 
 - [Bowserinator/Periodic-Table-JSON](https://github.com/Bowserinator/Periodic-Table-JSON) (CC BY-SA 3.0): names, families, periods, groups, physical properties
 - [Wikidata](https://www.wikidata.org/) (CC0): years of discovery
-- [Wikimedia pageviews](https://wikimedia.org/api/rest_v1/): article views
 
 ## Licence
 

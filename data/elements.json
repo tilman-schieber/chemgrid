@@ -18,9 +18,11 @@
   "discovered": 1766,
   "sets": [
    "air",
+   "body_top10",
    "crust_top10",
    "discovered_uk",
-   "essential"
+   "essential",
+   "sun_top10"
   ]
  },
  {
@@ -43,7 +45,9 @@
   "sets": [
    "air",
    "discovered_uk",
-   "named_celestial"
+   "lamp",
+   "named_celestial",
+   "sun_top10"
   ]
  },
  {
@@ -64,7 +68,8 @@
   "electronegativity": 0.98,
   "discovered": 1817,
   "sets": [
-   "discovered_sweden"
+   "discovered_sweden",
+   "flame_colour"
   ]
  },
  {
@@ -106,7 +111,9 @@
   "electronegativity": 2.04,
   "discovered": 1892,
   "sets": [
-   "discovered_uk"
+   "davy",
+   "discovered_uk",
+   "flame_colour"
   ]
  },
  {
@@ -127,7 +134,9 @@
   "electronegativity": 2.55,
   "discovered": -3750,
   "sets": [
-   "essential"
+   "body_top10",
+   "essential",
+   "sun_top10"
   ]
  },
  {
@@ -149,8 +158,10 @@
   "discovered": 1772,
   "sets": [
    "air",
+   "body_top10",
    "discovered_uk",
-   "essential"
+   "essential",
+   "sun_top10"
   ]
  },
  {
@@ -172,9 +183,11 @@
   "discovered": 1774,
   "sets": [
    "air",
+   "body_top10",
    "crust_top10",
    "discovered_uk",
-   "essential"
+   "essential",
+   "sun_top10"
   ]
  },
  {
@@ -218,7 +231,9 @@
   "discovered": 1898,
   "sets": [
    "air",
-   "discovered_uk"
+   "discovered_uk",
+   "lamp",
+   "sun_top10"
   ]
  },
  {
@@ -239,9 +254,13 @@
   "electronegativity": 0.93,
   "discovered": 1807,
   "sets": [
+   "body_top10",
    "crust_top10",
+   "davy",
    "discovered_uk",
    "essential",
+   "flame_colour",
+   "lamp",
    "latin_symbol"
   ]
  },
@@ -264,9 +283,11 @@
   "discovered": 1755,
   "sets": [
    "crust_top10",
+   "davy",
    "discovered_uk",
    "essential",
-   "named_place"
+   "named_place",
+   "sun_top10"
   ]
  },
  {
@@ -309,7 +330,8 @@
   "discovered": 1823,
   "sets": [
    "crust_top10",
-   "discovered_sweden"
+   "discovered_sweden",
+   "sun_top10"
   ]
  },
  {
@@ -330,6 +352,7 @@
   "electronegativity": 2.19,
   "discovered": 1669,
   "sets": [
+   "body_top10",
    "essential"
   ]
  },
@@ -351,7 +374,9 @@
   "electronegativity": 2.58,
   "discovered": -2000,
   "sets": [
-   "essential"
+   "body_top10",
+   "essential",
+   "sun_top10"
   ]
  },
  {
@@ -372,6 +397,7 @@
   "electronegativity": 3.16,
   "discovered": 1774,
   "sets": [
+   "body_top10",
    "discovered_sweden",
    "essential",
    "named_colour"
@@ -396,7 +422,8 @@
   "discovered": 1894,
   "sets": [
    "air",
-   "discovered_uk"
+   "discovered_uk",
+   "lamp"
   ]
  },
  {
@@ -417,9 +444,12 @@
   "electronegativity": 0.82,
   "discovered": 1807,
   "sets": [
+   "body_top10",
    "crust_top10",
+   "davy",
    "discovered_uk",
    "essential",
+   "flame_colour",
    "latin_symbol"
   ]
  },
@@ -441,9 +471,12 @@
   "electronegativity": 1,
   "discovered": 1808,
   "sets": [
+   "body_top10",
    "crust_top10",
+   "davy",
    "discovered_uk",
-   "essential"
+   "essential",
+   "flame_colour"
   ]
  },
  {
@@ -578,7 +611,8 @@
   "sets": [
    "crust_top10",
    "essential",
-   "latin_symbol"
+   "latin_symbol",
+   "sun_top10"
   ]
  },
  {
@@ -645,6 +679,7 @@
   "discovered": -9000,
   "sets": [
    "essential",
+   "flame_colour",
    "latin_symbol",
    "named_place"
   ]
@@ -797,7 +832,8 @@
   "discovered": 1898,
   "sets": [
    "air",
-   "discovered_uk"
+   "discovered_uk",
+   "lamp"
   ]
  },
  {
@@ -819,6 +855,7 @@
   "discovered": 1861,
   "sets": [
    "discovered_germany",
+   "flame_colour",
    "named_colour"
   ]
  },
@@ -840,7 +877,9 @@
   "electronegativity": 0.95,
   "discovered": 1787,
   "sets": [
+   "davy",
    "discovered_uk",
+   "flame_colour",
    "named_place"
   ]
  },
@@ -1082,6 +1121,7 @@
   "discovered": 1863,
   "sets": [
    "discovered_germany",
+   "flame_colour",
    "named_colour"
   ]
  },
@@ -1190,7 +1230,8 @@
   "discovered": 1898,
   "sets": [
    "air",
-   "discovered_uk"
+   "discovered_uk",
+   "lamp"
   ]
  },
  {
@@ -1212,6 +1253,7 @@
   "discovered": 1860,
   "sets": [
    "discovered_germany",
+   "flame_colour",
    "named_colour"
   ]
  },
@@ -1233,7 +1275,9 @@
   "electronegativity": 0.89,
   "discovered": 1808,
   "sets": [
-   "discovered_uk"
+   "davy",
+   "discovered_uk",
+   "flame_colour"
   ]
  },
  {
@@ -1622,6 +1666,7 @@
   "electronegativity": 2.36,
   "discovered": 1783,
   "sets": [
+   "lamp",
    "latin_symbol"
   ]
  },
@@ -1754,6 +1799,7 @@
   "electronegativity": 2,
   "discovered": -1500,
   "sets": [
+   "lamp",
    "latin_symbol",
    "named_celestial"
   ]
@@ -1777,6 +1823,7 @@
   "discovered": 1861,
   "sets": [
    "discovered_uk",
+   "flame_colour",
    "named_colour"
   ]
  },

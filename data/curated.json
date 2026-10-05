@@ -94,6 +94,31 @@
       "expect": 8,
       "note": "Present as a gas in dry air (not counting carbon dioxide).",
       "members": ["N", "O", "Ar", "Ne", "He", "Kr", "Xe", "H"]
+    },
+    "body_top10": {
+      "expect": 10,
+      "note": "The ten most abundant elements in the human body, by mass.",
+      "members": ["O", "C", "H", "N", "Ca", "P", "K", "S", "Na", "Cl"]
+    },
+    "sun_top10": {
+      "expect": 10,
+      "note": "The ten most abundant elements in the Sun, by mass.",
+      "members": ["H", "He", "O", "C", "Fe", "Ne", "N", "Si", "Mg", "S"]
+    },
+    "flame_colour": {
+      "expect": 12,
+      "note": "Gives a flame a clear colour in the flame test.",
+      "members": ["Li", "Na", "K", "Rb", "Cs", "Ca", "Sr", "Ba", "Cu", "B", "In", "Tl"]
+    },
+    "lamp": {
+      "expect": 8,
+      "note": "Makes the light in a common lamp or sign.",
+      "members": ["Ne", "Ar", "Kr", "Xe", "He", "Na", "Hg", "W"]
+    },
+    "davy": {
+      "expect": 7,
+      "note": "First isolated by Humphry Davy.",
+      "members": ["Na", "K", "Ca", "Mg", "Sr", "Ba", "B"]
     }
   }
 }

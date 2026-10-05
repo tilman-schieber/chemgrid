@@ -153,8 +153,6 @@ h1 { font: 700 1.6rem/1 var(--text); letter-spacing: -0.02em; margin: 0; margin-
   .cell.shake { animation: none; }
 }
 
-.legend { display: flex; flex-wrap: wrap; gap: 4px 6px; list-style: none; margin: 10px 0 0; padding: 0; font: 0.66rem var(--mono); color: var(--ink); }
-.legend li { padding: 1px 6px; border: 1px solid var(--ink); }
 
 /* The pick-from table: 18 columns, main body on rows 1–7, the f-block two rows further down. */
 .table-wrap { margin-top: 16px; overflow-x: auto; }
@@ -265,7 +263,6 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .board { order: 4; max-width: 100%; grid-template-columns: minmax(84px, 1fr) repeat(3, minmax(0, 1fr)); gap: 4px; }
   .label { font-size: 0.66rem; padding: 4px 2px; }
   .cell .symbol { font-size: 1.5rem; }
-  .legend { order: 5; font-size: 0.6rem; }
   .table-wrap { order: 6; margin-top: 10px; }
   .actions { order: 7; }
   .answers { order: 8; }
