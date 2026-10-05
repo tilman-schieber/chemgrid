@@ -40,7 +40,7 @@ const family = [
 
 const state = [
   { id: "phase:gas", label: "Gas at room temperature", group: "state", test: (e) => e.phase === "gas" },
-  { id: "phase:liquid", label: "Liquid or melts in your hand", group: "state", how: "Liquid at room temperature, or melting below 40 °C: bromine, mercury, caesium, gallium, rubidium and francium.", test: (e) => has(e.melt) && e.melt < 40 },
+  { id: "phase:liquid", label: "Liquid or melts in your hand", group: "state", how: "Not a gas: liquid at room temperature, or a solid melting below 40 °C: bromine, mercury, caesium, gallium, rubidium and francium.", test: (e) => e.phase !== "gas" && has(e.melt) && e.melt < 40 },
   { id: "melt:high", label: "Melts above 2000 °C", group: "state", test: (e) => has(e.melt) && e.melt > 2000 },
   { id: "melt:low", label: "Melts below 0 °C", group: "state", test: (e) => has(e.melt) && e.melt < 0 },
   { id: "boil:low", label: "Boils below 0 °C", group: "state", test: (e) => has(e.boil) && e.boil < 0 },
